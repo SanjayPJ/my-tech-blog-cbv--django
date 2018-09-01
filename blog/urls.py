@@ -19,8 +19,8 @@ from . import views
 urlpatterns = [
     path('', views.PostListView.as_view(), name='post-list'),
     path('about/', views.About.as_view(), name='about'),
-    path('post/<slug:pk>/', views.PostDetailView.as_view(), name='post-detail'),
     path('post/new/', views.PostCreateView.as_view(), name='post-new'),
+    path('post/<slug:pk>/', views.PostDetailView.as_view(), name='post-detail'),
     path('post/<slug:pk>/edit', views.PostUpdateView.as_view(), name='post-edit'),
     path('post/<slug:pk>/remove', views.PostDeleteView.as_view(), name='post-remove'),
     path('draft/', views.DraftListView.as_view(), name='post-draft-list'),

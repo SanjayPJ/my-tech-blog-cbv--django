@@ -9,16 +9,37 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <title>MY-TECH-BLOG</title>
+    <style>
+        body{
+            font-family: 'Raleway', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'post-list' %}"><b>MY-TECH-BLOG</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link" href="{% url 'post-list' %}">Home</a>
+                    <a class="nav-item nav-link" href="{% url 'admin:index' %}">Admin</a>
+                    <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         {% block body_block %}
-            
+
         {% endblock body_block %}
-    </div>  
+    </div>
 </body>
 
 </html>
