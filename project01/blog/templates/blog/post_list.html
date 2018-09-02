@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    {% for post in post_list %}
+    <div class="card my-1">
+        <div class="card-body">
+            <h4><a href="{% url 'post-detail' pk=post.pk %}" class="text-dark"><b><u>{{ post.title }}</u></b></a></h4>
+            <p><small>created by {{ post.user }} on {{ post.created_date }}</small></p>
+            <p class="text-muted my-1 text-justify">{{ post.body|truncatechars:400 }}</p>
+            <a href="{% url 'post-detail' pk=post.pk %}" class="text-muted"><u>Read more</u></a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
