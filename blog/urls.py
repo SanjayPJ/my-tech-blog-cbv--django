@@ -28,4 +28,5 @@ urlpatterns = [
     path('post/<slug:pk>/comment', views.add_comment_to_post, name='add_comment_to_post'),
     path('comment/<slug:pk>/approve', views.comment_approve, name='comment_approve'),
     path('comment/<slug:pk>/remove', views.comment_remove, name='comment_remove'),
+    path('logout/', views.logout_view, name='logout_view'),
 ]

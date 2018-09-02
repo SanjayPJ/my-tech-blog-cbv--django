@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -26,14 +27,16 @@ class PostDetailView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
-    form_class = PostForm
+    # form_class = PostForm
     model = Post
+    fields = ["author", "title", "text",]
 
-class PostUpdateView(LoginRequiredMixin, CreateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
-    form_class = PostForm
+    # form_class = PostForm
     model = Post
+    fields = ["author", "title", "text",]
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
@@ -55,14 +58,14 @@ class DraftListView(LoginRequiredMixin, ListView):
 
 @login_required
 def publish_post(request, pk):
-    post = get_object_or_404(Post, pk)
-    post.publish
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
     return redirect("post-detail", pk=pk)
 
 
 @login_required
 def add_comment_to_post(request, pk):
-    post = get_object_or_404(Post, pk)
+    post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -78,13 +81,17 @@ def add_comment_to_post(request, pk):
 
 @login_required
 def comment_approve(request, pk):
-    comment = get_object_or_404(Comment, pk)
+    comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
     return redirect("post-detail", pk=comment.post.pk)
 
 @login_required
 def comment_remove(request, pk):
-    comment = get_object_or_404(Comment, pk):
+    comment = get_object_or_404(Comment, pk=pk)
     post_pk = comment.post.pk
     comment.delete()
     return redirect("post-detail", pk=post_pk)
+
+def logout_view(request):
+    logout(request)
+    return redirect("post-list")

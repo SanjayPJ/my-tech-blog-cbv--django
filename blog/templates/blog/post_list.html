@@ -1,7 +1,17 @@
 {% extends "base.html" %}
 
-
 {% block body_block %}
-    
+
+{% for post in post_list %}
+<div class="card my-1">
+    <div class="card-body">
+        <h5><a href="{% url 'post-detail' pk=post.pk %}"><b>{{ post.title }}</b></a></h5>
+        <div class="text-muted"><small>by {{ post.author }} on {{ post.create_date }}</small></div>
+        <p>{{ post.post_short }}</p>
+        <small><a href="{% url 'post-detail' pk=post.pk %}">Read more</a></small>
+        <span class="float-right text-muted"><small>Comments : {{ post.approved_comments.count }}</small></span>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock body_block %}
-    

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+
+<form class="mt-4" action="" method="POST">
+    <p class="mb-2">Are you sure, you want to delete "<b>{{ object }}</b>"</p>
+    {% csrf_token %}
+    <button class="btn btn-danger btn-sm" type="submit"><small><i class="fas fa-check"></i> Confirm</small></button>
+</form>
+
+{% endblock body_block %}
