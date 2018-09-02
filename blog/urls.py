@@ -23,5 +23,9 @@ urlpatterns = [
     path('post/<slug:pk>/', views.PostDetailView.as_view(), name='post-detail'),
     path('post/<slug:pk>/edit', views.PostUpdateView.as_view(), name='post-edit'),
     path('post/<slug:pk>/remove', views.PostDeleteView.as_view(), name='post-remove'),
+    path('post/<slug:pk>/publish', views.publish_post, name='post-publish'),
     path('draft/', views.DraftListView.as_view(), name='post-draft-list'),
+    path('post/<slug:pk>/comment', views.add_comment_to_post, name='add_comment_to_post'),
+    path('comment/<slug:pk>/approve', views.comment_approve, name='comment_approve'),
+    path('comment/<slug:pk>/remove', views.comment_remove, name='comment_remove'),
 ]
